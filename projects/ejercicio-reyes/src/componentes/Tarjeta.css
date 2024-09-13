@@ -1,0 +1,22 @@
+.contenedor{
+    display: flex;
+    gap: 3rem;
+}
+
+.tarjeta{
+    background: orange;
+    padding: 2rem;
+    border-radius: 10%;
+}
+
+.rey{
+    width: 400px;
+    height: 400px;
+}
+
+.text{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
