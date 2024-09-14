@@ -1,68 +1,252 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  margin: 0;
+  color: rgba(255, 255, 255, 0.87);
+  background: #dfba69;
+}
+
+.nav{
+  font-family: "Montserrat";
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  justify-content: right;
+  background: #2a2c31;
+  height: 5rem;
+  align-items: center;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.links a{
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  font-size: 17px;
+  text-transform: uppercase;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+.links a:hover{
+  text-decoration: none;
+  color: #dfba69;
+  font-weight: 600;
+}
+
+.links {
+  display: flex;
+  gap: 1rem;
+  margin-right: 2rem;
+  align-items: center;
+}
+
+.btn-nav{
+  width: 70px;
+  height: 40px;
+  border-radius: 18px;
+  border: 0;
+  background: #fffedf;
+  font-size: 21px;
+  font-weight: 700;
+  color: #3e4147;
+}
+
+.btn-nav:hover{
+  background: #dfba69;
+  color: #2e2e2e;
+  font-size: 21px;
+  font-weight: 700;
+}
+
+/* CABECERA 1 */
+
+.seccion-cabecera{
+  height: 650px;
+  background: #3e4147;
+  display: flex;
+  justify-content: space-around;
+  padding-top: 18rem;
+}
+
+
+.cabecera-izq{
+  width: 100%;
+  height: 100%;
+  align-content: center;
+  text-align: end;
+
+}
+
+.cabecera-izq h1{
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 5px;
+  font-size: 90px;
+  color: #dfba69;
+  animation: change-color 2s ease-in-out alternate;
+}
+
+
+@keyframes change-color{
+  0%{
+    color: #fffedf;
+    opacity: 1;
+  }
+  50%{
+    color: #fffedf;
+  }
+  100%{
+    color: #dfba69;
+    opacity: 1;
+  }
+}
+
+
+.cabecera-izq p{
+  font-size: 33px;
+  color: #fffedf;
   font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  animation: change-position 2s ease-out;
+  font-family: "Montserrat";
+
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+@keyframes change-position{
+  from{
+    transform: translate(-500px);
+    opacity: 0;
   }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+  to{
+    transform: translate(0px);
+    opacity: 1;
   }
 }
+
+.cabecera-der{
+  width: 100%;
+  height: 100%;
+  align-content: center;
+  text-align: start;
+  margin-left: 10rem;
+}
+
+.imagen-perfil{
+  width: 350px;
+  border-radius: 50%;
+  animation: change-size 1s linear;
+  border: 6px solid #666973ed;
+}
+
+@keyframes change-size{
+  0%{
+    scale: 100%;
+  }
+  50%{
+    scale: 110%;
+  }
+  100%{
+    scale: 100%;
+  }
+}
+
+.contenedor-path{
+  background: #3e4147;
+}
+
+.contenedor-path path{
+  background: #3e4147;
+}
+
+
+
+/* TARJETAS */
+
+.seccion-tarjetas {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 3rem;
+  column-gap: 3rem;
+  justify-content: center;
+  align-items: flex-start;
+  padding-inline: 20%;
+  height: auto;
+  margin-bottom: 54rem;
+}
+
+.card {
+  --background: linear-gradient(to left, #4a659b 0%, #be3838 100%);
+  width: 390px;
+  height: 554px;
+  padding: 5px;
+  border-radius: 1rem;
+  overflow: visible;
+  background: #59d261e1;
+  background: var(--background);
+  position: relative;
+  z-index: 1;
+  view-timeline-name: --tarjeta;
+  view-timeline-axis: block;
+  animation-timeline: --tarjeta;
+  animation-name: ampliar;
+  animation-range: entry 0% cover 50%;
+  animation-fill-mode: both;
+ }
+
+ @keyframes ampliar {
+    0%{
+      opacity: 0.5;
+      scale: 45%;
+    }
+    25%{
+      opacity: 0.7;
+    }
+    to{
+      opacity: 1;
+      scale: 100%;
+    }
+ }
+
+ .card::after {
+  position: absolute;
+  content: "";
+  top: 30px;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  transform: scale(0.8);
+  filter: blur(35px);
+  background: #f7ba2b;
+  background: var(--background);
+  transition: opacity .1s;
+ }
+ 
+ .card-info {
+  --color: #181818;
+  background: var(--color);
+  color: var(--color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  border-radius: .7rem;
+ }
+ 
+ .card .title {
+  font-weight: bold;
+  letter-spacing: .1em;
+ }
+ 
+ /*Hover*/
+ .card:hover::after {
+  opacity: 0;
+ }
+ 
+ .card:hover .card-info {
+  color: #f7ba2b;
+  transition: color 1s;
+ }
+ 
