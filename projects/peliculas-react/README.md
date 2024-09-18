@@ -4,7 +4,7 @@
 
 Requerimientos:
 
-- Necesita mostrar un input para buscar la película y un botón para buscar.
+✅ Necesita mostrar un input para buscar la película y un botón para buscar.
 ✅ Lista las películas encontradas y mostrar el título, año y poster.
 ✅ Haz que las películas se muestren en un grid responsive.
 

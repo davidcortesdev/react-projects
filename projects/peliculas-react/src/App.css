@@ -1,32 +1,89 @@
-header{
+.page{
   display: flex;
   flex-direction: column;
-  place-items: center;
-  margin: 0 auto;
-  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+main{
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 form{
   display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-buscador{
+  width: 20rem;
+  padding: 1rem;
+  background: #ffffff0c;
+  border: none;
+  color: white;
+  border-radius: 0.4rem;
+  outline: none;
+}
+
+
+.input-buscador::placeholder{
+  color: white;
+}
+
+.boton-buscar{
+  padding: 1rem 3rem;
+}
+
+.boton-buscar:hover{
+  outline: none;
+  background: rgba(85, 88, 98, 0.574);
+  
+}
+
+header{
+  margin-bottom: 4rem;
+  display: flex;
   flex-direction: column;
-  text-align: center;
-  gap: 1rem;
+  justify-content: center;
+  align-items: center;
 }
 
 .lista-peliculas{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-content: center;
-  text-align: center;
+  list-style: none;
+  margin: 0;
   padding: 0;
-  gap: 2rem;
+  
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+  text-align: center;
 }
 
 .pelicula{
+  font-size: 0.4rem;
   background: rgba(0, 0, 0, 0.27);
-  list-style: none;
-  width: 20rem;
-  padding: 2rem;
   border-radius: 1rem;
+  padding-block: 0.8rem;
+  box-shadow: -5px 5px 5px 5px rgba(0, 0, 0, 0.066);
+}
+
+.pelicula h1{
+  font-size: 1.5rem;
+}
+
+.pelicula p{
+  font-size: 1.5rem;
+}
+
+.pelicula img{
+  border-radius: 1rem;
+}
+
+.pelicula:hover{
+  background: rgba(41, 44, 53, 0.574);
 }
