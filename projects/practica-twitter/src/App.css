@@ -1,0 +1,97 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.container{
+  display: flex;
+  justify-content: center;
+  height: auto;
+  padding: 0.8rem;
+}
+
+.info-twitter{
+  margin-left: 1rem;
+  text-align: left;
+  width: 100%;
+
+}
+
+.imagen-twitter{
+  background: lightblue;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  
+}
+
+.tarjeta-twitter{
+  display: flex;
+  justify-content: space-between;
+  width: 390px;
+  align-content: start;
+  align-items: center;
+}
+
+.nombre-usuario{
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  font-weight: 700;
+}
+
+.perfil-usuario{
+  margin: 0;
+  padding: 0;
+  font-weight: 200;
+}
+
+
+.button-twitter{
+  background: white;
+  color: black;
+  padding: 0;
+  margin: 0;
+  width: 100px;
+  height: 35px;
+  border-radius: 2rem;
+  margin-left: 1.3rem;
+}
+
+.button-twitter:hover{
+  background: rgb(104, 176, 238);
+  color: rgb(255, 255, 255);
+}
+
+.button-twitter-siguiendo{
+  border: 1px solid white;
+  background: rgba(0, 0, 0, 0.055);
+  color: rgb(255, 255, 255);
+  padding: 0;
+  margin: 0;
+  width: 130px;
+  height: 35px;
+  border-radius: 2rem;
+  margin-left: 1.3rem;
+}
+
+.button-twitter-siguiendo:hover{
+  color: red;
+  background: rgba(255, 0, 0, 0.161);
+  border: none;
+}
+
+.button-twitter-siguiendo:hover .button-twitter-dejarseguir{
+  display: block;
+}
+
+.button-twitter-siguiendo:hover .button-twitter-text{
+  display: none;
+}
+
+
+.button-twitter-dejarseguir{
+  display: none;
+}
