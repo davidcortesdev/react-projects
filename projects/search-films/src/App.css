@@ -24,7 +24,7 @@
   width: 5rem;
   align-items: center;
   align-content: center;
-  background: rgb(144, 131, 107);
+  background: rgba(255, 149, 87, 0.738);
   margin-left: 1rem;
   justify-content: center;
 }
@@ -49,7 +49,8 @@
 .search-movie{
   list-style: none;
   margin: 0 auto;
-  border: 3px solid rgba(209, 207, 207, 0.117);
+  height: 28rem;
+  border: 3px solid rgba(255, 149, 87, 0.738);
   border-start-start-radius: 15px;
   border-start-end-radius: 15px;
 }
@@ -61,12 +62,12 @@
   border-start-end-radius: 12px;
   border-start-start-radius: 12px;
   align-content: center;
-  background-color: rgba(255, 235, 205, 0.213);
+  background-color: rgba(255, 149, 87, 0.738);
   margin: 0;
 }
 
 .search-image{
-  width: 100%;
+  width: 18rem;
   height: 25rem;
 }
 

@@ -6,7 +6,6 @@ export function Search({search}) {
     const API_KEY = '4287ad07'
     const URL = 'https://www.omdbapi.com/?apikey='
 
-
     const [movies, setMovies] = useState([])
 
     useEffect(()=>{
