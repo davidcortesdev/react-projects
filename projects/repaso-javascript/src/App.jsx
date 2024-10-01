@@ -1,11 +1,11 @@
 import './App.css'
-import './logic/02-desestructuracion.js'
+import './logic/06-asyn-await'
 
 function App() {
 
   return (
     <>
-      
+
     </>
   )
 }
