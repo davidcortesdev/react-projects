@@ -1,4 +1,4 @@
-const api_key = 'FaKt9J41hu7UF0lbPvRBNybY4MqJPIUb'
+const api_key = 'cEOmFiid7iPu2Mbybj1vyqu4dGQbjZP9'
 
 fetch(`https://api.giphy.com/v1/gifs/random?api_key=${api_key}`)
     .then(res => res.json())
