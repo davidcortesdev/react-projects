@@ -6,13 +6,10 @@ export const GifApp = () => {
     const [categories, setCategories] = useState(['Dragon Ball','Naruto'])
 
     const onAddCategory = ( newCategory) => {
-
         if(categories.includes(newCategory)) return
-
         //categories.push('Valorant') -> Muta un estado, hay que evitarlo.
         setCategories([newCategory,...categories])
     }
-
 
     return(
         <>
@@ -22,7 +19,6 @@ export const GifApp = () => {
             <AddCategory 
                 onNewCategory={ onAddCategory } />
             
-
             {
             categories.map(( category ) => (
                 <GifGrid 
