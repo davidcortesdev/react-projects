@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import { useState } from "react"
 import { AddCategory, GifGrid } from "./components"
 
@@ -29,4 +30,9 @@ export const GifApp = () => {
 
         </>
     )
+}
+
+GifApp.propTypes = {
+    category: PropTypes.string,
+    newCategory: PropTypes.string,
 }
