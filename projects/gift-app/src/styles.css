@@ -1,0 +1,88 @@
+* {
+    font-family: Helvetica, Arial, sans-serif;
+    background-color: rgb(50, 50, 50);
+  }
+  
+  body {
+    padding: 60px;
+  }
+  
+  input {
+    background-color: rgb(214, 203, 163);
+    border-radius: 5px;
+    border: 3px solid rgb(217, 156, 35);
+    color: rgb(64, 64, 64);
+    font-size: 1.2rem;
+    outline: none;
+    padding: 10px 15px;
+    width: 100%;
+  }
+  h1 {
+    color: antiquewhite;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  h3 {
+    font-size: 3rem;
+    margin-bottom: 5px;
+  }
+
+  .span1{
+    color: rgb(113, 113, 205);
+  }
+  
+  .card-grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  
+  .card {
+    align-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.03);
+    display: flex;
+    flex-direction: column;
+    height: 0%;  
+    justify-content: center;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    overflow: hidden;
+  }
+  
+  .card p {
+    background-color: white;
+    flex: 1;
+    font-size: 1.5rem;
+    padding: 5px 20px 0px 20px;
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  .card img {
+    width: 100%;
+  }
+
+  button{
+    border: none;
+    background: white;
+    border-radius: 20px;
+    padding: 0.5rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  button:hover{
+    background: rgb(255, 247, 204);
+  }
+
+  ol{
+    color: white;
+  }
