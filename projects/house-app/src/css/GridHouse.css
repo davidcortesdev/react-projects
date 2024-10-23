@@ -1,0 +1,129 @@
+.section-grid-house{
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    height: auto;
+    background: #ffffff;
+}
+
+h1{
+    margin-block: 15px;
+}
+
+.grid-house {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 180px 180px 180px;
+    gap: 10px;
+    max-width: 400px;
+    margin: 0 auto;
+    padding-block: 30px;
+}
+
+.tarjeta1-house, .tarjeta2-house, .tarjeta3-house, .tarjeta4-house {
+    border-radius: 0.4rem;
+}
+
+.tarjeta1-house {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(rgb(248, 250, 118),rgb(230, 224, 122));
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.297);
+    display: flex;
+    flex-direction: column;
+}
+
+.tarjeta2-house {
+    grid-column: 2 / 3;
+    grid-row: 1 / 3;
+    background: radial-gradient(rgb(85, 167, 255),rgba(105, 105, 224, 0.985));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.297);
+    display: flex;
+    flex-direction: column;
+}
+
+.tarjeta3-house {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    background: linear-gradient(rgb(158, 255, 200),rgba(109, 195, 120, 0.967));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.297);
+    display: flex;
+    flex-direction: column;
+}
+
+.tarjeta4-house {
+    grid-column: 1 / 3;
+    grid-row: 3 / 4;
+    background: radial-gradient(rgb(255, 191, 149),rgb(225, 133, 133));
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.297);
+    display: flex;
+}
+
+.kitchen{
+    width: 65%;
+}
+
+.bathroom{
+    width: 85%;
+}
+
+.livingroom{
+    width: 45%;
+}
+
+.room{
+    width: 68%;
+}
+
+.livingroom{
+    width: 48%;
+    height: 100%;
+}
+
+.tarjeta1-text-house{
+    padding: 0;
+    color: white;
+    text-align: center;
+    align-content: center;
+    margin-left: 20px;
+    font-size: 2rem;
+    margin: 0;
+    text-shadow: 2px 2px black;
+}
+
+.tarjeta2-text-house{
+    color: white;
+    text-align: center;
+    align-content: center;
+    margin-left: 20px;
+    font-size: 2rem;
+    margin: 0;
+    text-shadow: 2px 2px black;
+}
+
+.tarjeta3-text-house{
+    color: white;
+    text-align: center;
+    align-content: center;
+    margin-left: 20px;
+    font-size: 2rem;
+    margin: 0;
+    text-shadow: 2px 2px black;
+}
+
+.tarjeta4-text-house{
+    color: white;
+    text-align: center;
+    align-content: center;
+    margin-left: 20px;
+    font-size: 2rem;
+    text-shadow: 2px 2px black;
+}
