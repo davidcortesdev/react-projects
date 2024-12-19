@@ -1,15 +1,5 @@
-
-import PropTypes from 'prop-types'
 import { checkingCredentials, login, logout } from './authSlice'
-import { registerUserWithEmailPassword, signInWithGoogle } from '../../firebase/providers'
-
-export const checkingAuthentication = () => {
-    return async( dispatch ) => {
-        
-        dispatch( checkingCredentials() )
-
-    }
-}
+import { loginWithEmailPassword, logoutFirebase, registerUserWithEmailPassword, signInWithGoogle } from '../../firebase/providers'
 
 export const startGoogleSignIn = ( ) => {
     return async( dispatch ) => {
@@ -39,7 +29,29 @@ export const startCreatingUserWithEmailPassword = ({ email, password, displayNam
 }
 
 
-checkingAuthentication.propTypes = {
-    email: PropTypes.string,
-    password: PropTypes.string
+export const startLoginWithEmailPassword = ({ email, password }) => {
+    return async (dispatch) => {
+        
+        dispatch( checkingCredentials() )
+
+        const result = await loginWithEmailPassword({ email, password })
+        
+        if ( result.ok ) { 
+            return dispatch( login( result ) )
+
+        } else { 
+            return dispatch( logout( result ) )
+        }
+    }
+}
+
+
+export const startLogout = () => {
+    return async( dispatch ) => {
+        
+        await logoutFirebase()
+
+        dispatch( logout({ errorMessage: null }) )
+        
+    }
 }

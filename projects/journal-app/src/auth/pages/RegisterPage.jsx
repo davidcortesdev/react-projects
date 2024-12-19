@@ -78,7 +78,7 @@ export const RegisterPage = () => {
             <Grid item xs={12} sx={{ mt: 2 }}>
               <TextField 
                 label="Contraseña"
-                type="current-password"
+                type="password"
                 placeholder="Contraseña"
                 fullWidth
                 name="password"
