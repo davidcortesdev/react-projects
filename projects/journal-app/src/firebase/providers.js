@@ -63,12 +63,12 @@ export const registerUserWithEmailPassword = async({ email, password, displayNam
 export const loginWithEmailPassword = async ({ email, password }) => {
     
     try {
-        const userCredentials = await signInWithEmailAndPassword(FirebaseAuth, email, password)
-        const { uid, displayName, photoURL} = userCredentials.user
+        const resp = await signInWithEmailAndPassword(FirebaseAuth, email, password)
+        const { uid, displayName, photoURL} = resp.user
 
         return { 
             ok: true, 
-            email, password, uid, displayName, photoURL
+            uid, displayName, photoURL
         }
 
     } catch (error) {
