@@ -2,7 +2,6 @@
 export const fileUpload = async( file ) => {
   
     if( !file ) throw new Error( 'No se ha encontrado ningún archivo.')
-    //"https://res.cloudinary.com/react-apps-d/image/upload/v1735296960/lpm08ibvbq60fkpfad4j.png",
 
     const cloudUrl = 'https://api.cloudinary.com/v1_1/react-apps-d/upload'
 
