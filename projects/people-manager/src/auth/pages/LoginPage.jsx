@@ -3,6 +3,7 @@ import { AuthLayout } from "../layout/AuthLayout";
 import { useForm } from "../../hooks/useForm";
 import { useMemo } from "react";
 import { startLogin } from "../../store/auth/thunks";
+import { useNavigate, Link } from "react-router-dom";
 
 const formData = {
   email: '',
@@ -10,27 +11,37 @@ const formData = {
 };
 
 export const LoginPage = () => {
-  const { status, errorMessage } = useSelector((state) => state.auth);
-
+  
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  
+  const { status, errorMessage } = useSelector((state) => state.auth);
   const { email, password, onInputChange } = useForm(formData);
 
   const isAuthenticating = useMemo(() => status === 'checking', [status]);
 
   const onSubmit = (event) => {
     event.preventDefault();
-    dispatch(startLogin({ email, password }));
+    
+    if (email.trim() === '' || password.trim() === '') {
+      alert("Por favor, completa todos los campos.");
+      return;
+    }
+
+    dispatch(startLogin({ email, password, navigate }));
   };
 
   return (
     <AuthLayout title="Login">
       <form onSubmit={onSubmit}>
+
         <input
           type="email"
           placeholder="correo@google.com"
           name="email"
           value={email}
           onChange={onInputChange}
+          autoComplete="email"
         />
 
         <input
@@ -39,22 +50,25 @@ export const LoginPage = () => {
           name="password"
           value={password}
           onChange={onInputChange}
+          autoComplete="current-password"
         />
 
-        <div style={{ marginTop: '8px', display: errorMessage ? 'block' : 'none' }}>
-          <p style={{ color: 'red', backgroundColor: '#ffe6e6', padding: '8px', borderRadius: '4px', border: '1px solid red' }}>
-            {errorMessage}
-          </p>
-        </div>
+        {/* Mostrar mensaje de error si existe */}
+        {errorMessage && (
+          <div style={{ marginTop: '8px' }}>
+            <p style={{ color: 'red', backgroundColor: '#ffe6e6', padding: '8px', borderRadius: '4px', border: '1px solid red' }}>
+              {errorMessage}
+            </p>
+          </div>
+        )}
 
         <button type="submit" disabled={isAuthenticating}>
-          Iniciar Sesión
+          {isAuthenticating ? "Cargando..." : "Iniciar Sesión"}
         </button>
       </form>
 
-
       <p>
-        ¿No tienes cuenta? <a href="/auth/register">Regístrate aquí</a>
+        ¿No tienes cuenta? <Link to="/auth/register">Regístrate aquí</Link>
       </p>
     </AuthLayout>
   );

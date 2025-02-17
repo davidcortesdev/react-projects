@@ -1,93 +1,66 @@
-import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite"
-import { addNewEmptyNote, setActiveNote, savingNewNote, setNotes, setSaving, updateNote, setPhotosToActiveNote, deleteNoteById } from "./"
+import { addDoc, collection, getDocs, orderBy, query, where } from "firebase/firestore";
+import { nuevoMensaje, setEmpleados, setMensajes } from "./appSlice";
 import { FirebaseDB } from "../../firebase/config"
-import { fileUpload, loadNotes } from "../../helpers"
 
-export const startNewNote = () =>{
-    return async( dispatch, getState ) => {
 
-        dispatch( savingNewNote() )
+export const getMensajes = (userId) => {
+  return async (dispatch) => {
+    try {
+      const queryMensajes = query(
+        collection(FirebaseDB, 'mensajes'),
+        where('receptorId', '==', userId),
+        orderBy('fechaMensaje', 'asc')
+      );
+      const querySnapshot = await getDocs(queryMensajes);
+      const messages = [];
+      querySnapshot.forEach((doc) => {
+        messages.push({ id: doc.id, ...doc.data() });
+      });
 
-        const { uid } = getState().auth
-        // uid
-
-        const newNote = {
-            title: '',
-            body: '',
-            date: new Date().getTime(),
-            imageUrls: []
-        }
-
-        const newDoc = doc( collection( FirebaseDB, `${uid}/journal/notes` ) )
-        await setDoc( newDoc, newNote )
-
-        newNote.id = newDoc.id
-
-        // dispatch
-        dispatch( addNewEmptyNote( newNote ) )
-        dispatch( setActiveNote( newNote ) )
-
+      dispatch(setMensajes(messages));
+    } catch (error) {
+      console.error('Error al obtener mensajes:', error);
     }
-}
-
-export const startLoadingNotes = () => {
-    return async( dispatch, getState ) => {
-        
-        const { uid } = getState().auth
-        if( !uid ) throw new Error( 'El UID del usuario no existe.')
-
-        const notes = await loadNotes( uid )
-        dispatch( setNotes( notes ))
-        
-    }
+  }
 }
 
 
-export const startSaveNote = () => {
-    return async( dispatch, getState) => {
 
-        dispatch( setSaving() )
-
-        const { uid } = getState().auth
-        const { active:note } = getState().journal
-
-        const noteToFireStore = {...note}
-        delete noteToFireStore.id
-
-        const docRef = doc( FirebaseDB, `${ uid }/journal/notes/${ note.id }`)
-        await setDoc( docRef, noteToFireStore, { merge: true })
-
-        dispatch( updateNote( note ))
+export const enviarMensaje = ({emisorId, emisorEmail, receptorId, texto, fechaMensaje}) => {
+  return async (dispatch) => {
+    try {
+      const mensaje = {
+        emisorId,
+        emisorEmail,
+        receptorId,
+        texto,
+        fechaMensaje,
+      };
+      const docRef = await addDoc(collection(FirebaseDB, 'mensajes'), mensaje);
+      dispatch(nuevoMensaje({ id: docRef.id, ...mensaje }));
+    } catch (error) {
+      console.error('Error al enviar mensaje:', error);
     }
+  }
 }
 
 
-export const startUploadingFiles = ( files = [] ) => {
-    return async( dispatch ) => {
-        
-        dispatch( setSaving() )
 
-        const fileUploadPromises = []
-        for (const file of files) {
-            fileUploadPromises.push( fileUpload( file ))
-        }
-
-        const photosUrls = await Promise.all( fileUploadPromises )
-        dispatch( setPhotosToActiveNote( photosUrls ))
+export const getEmpleados = () => {
+  return async (dispatch) => {
+    try {
+      const queryEmpleados = query(
+        collection(FirebaseDB, 'users'),
+        orderBy('nombre', 'asc')
+      );
+      const querySnapshot = await getDocs(queryEmpleados);
+      const empleados = [];
+      querySnapshot.forEach((doc) => {
+        empleados.push({ id: doc.id, ...doc.data() });
+      });
+      dispatch(setEmpleados(empleados));
+    } catch (error) {
+      console.error('Error al obtener empleados:', error);
     }
-}
-
-
-export const startDeletingNote = () => {
-    return async( dispatch, getState ) => {
-
-        const { uid } = getState()
-        const { active: note} = getState().journal
-
-        const docRef = doc( FirebaseDB, `${ uid }/journal/notes/${ note.id }`)
-        await deleteDoc( docRef )
-
-        dispatch( deleteNoteById( note.id ))
-
-    }
+  }
 }

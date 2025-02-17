@@ -1,8 +1,10 @@
+/* eslint-disable react/prop-types */
 import { useDispatch, useSelector } from "react-redux";
 import { startCreatingUser } from "../../store/auth/thunks";
 import { AuthLayout } from "../layout/AuthLayout";
 import { useMemo, useState } from "react";
 import { useForm } from "../../hooks/useForm";
+import { useNavigate } from "react-router-dom";
 
 const formData = {
   email: '',
@@ -11,8 +13,8 @@ const formData = {
   apellido2: '',
   fechaNacimiento: '',
   fechaAntiguedad: '',
-  departamento: '',
-  puesto: '',
+  departamento: 'TI',
+  puesto: 'Manager',
   password: '',
 }
 
@@ -23,14 +25,12 @@ const formValidations = {
   apellido2: [(value) => value.length >= 3, 'El nombre debe contener al menos 3 caracteres.'],
   fechaNacimiento: [(value) => value.length >= 3, 'El nombre debe contener al menos 3 caracteres.'],
   fechaAntiguedad: [(value) => value.length >= 3, 'El nombre debe contener al menos 3 caracteres.'],
-  departamento: [(value) => value.length >= 3, 'El nombre debe contener al menos 3 caracteres.'],
-  puesto: [(value) => value.length >= 3, 'El nombre debe contener al menos 3 caracteres.'],
   password: [ (value) => value.length >= 6 , 'La contraseña debe tener mas de 6 caracteres.'],
 }
 
 export const RegisterPage = () => {
 
-
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const [formSubmitted, setFormSubmitted] = useState(false)
@@ -42,7 +42,7 @@ export const RegisterPage = () => {
     email, nombre, apellido1, apellido2, fechaNacimiento, fechaAntiguedad,
     departamento, puesto, password, onInputChange, isFormValid, 
     emailValid, nombreValid, apellido1Valid, apellido2Valid, fechaNacimientoValid,
-    departamentoValid, puestoValid, fechaAntiguedadValid, passwordValid, formState
+    fechaAntiguedadValid, passwordValid, formState
   } = useForm(formData, formValidations)
 
 
@@ -52,7 +52,8 @@ export const RegisterPage = () => {
 
     if( !isFormValid ) return
 
-    dispatch( startCreatingUser(formState) )
+    dispatch( startCreatingUser({ ...formState, navigate }) )
+    
   }
 
 
@@ -122,25 +123,19 @@ export const RegisterPage = () => {
           aria-describedby={ fechaAntiguedadValid ? 'email-helper-text' : undefined } />
 
 
-        <input 
-          type="text" 
-          placeholder="Departamento"
-          name="departamento"
-          value={ departamento }
+        <SelectInput 
+          name='departamento'
+          value={departamento}
+          options={['TI', 'Ventas', 'Recursos Humanos']}
           onChange={ onInputChange }
-          aria-label={ !!departamentoValid && formSubmitted }
-          aria-describedby={ departamentoValid ? 'email-helper-text' : undefined } />
+        />
 
-
-        <input 
-          type="text" 
-          placeholder="Puesto"
-          name="puesto"
-          value={ puesto }
+        <SelectInput 
+          name='puesto'
+          value={puesto}
+          options={['Manager', 'Asesor', 'Desarrollador']}
           onChange={ onInputChange }
-          aria-label={ !!puestoValid && formSubmitted }
-          aria-describedby={ puestoValid ? 'email-helper-text' : undefined } />
-
+        />
 
 
         <input 
@@ -162,8 +157,9 @@ export const RegisterPage = () => {
         <button 
           type="submit"
           disabled={ isCheckingAuthentication }>
-            Registrarse
+            Registar
         </button>
+        
       </form>
 
       <p>
@@ -172,3 +168,20 @@ export const RegisterPage = () => {
     </AuthLayout>
   );
 };
+
+
+const SelectInput = ({ name, value, options, onChange }) => (
+  <div className="form-group">
+    <select name={name} className="form-select1" value={value} onChange={onChange}>
+      {options.map(option => (
+        <option 
+        key={option} 
+        value={option}
+        style={{ backgroundColor: '#f0f0f0', color: '#333' }}
+      >
+      {option}
+        </option>
+      ))}
+    </select>
+  </div>
+);
