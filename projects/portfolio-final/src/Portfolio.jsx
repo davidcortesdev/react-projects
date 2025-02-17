@@ -50,6 +50,27 @@ export const Portfolio = () => {
               <p>Un buscador de películas, obtenidas de una API.</p>
             </div>
           </div>
+          <div className="project-card">
+            <div className="card-img project4"></div>
+            <div className="card-content">
+              <h3>Programa empleados</h3>
+              <p>Una aplicación para gestionar los empleados de una empresa.</p>
+            </div>
+          </div>
+          <div className="project-card">
+            <div className="card-img project5"></div>
+            <div className="card-content">
+              <h3>Programa empleados</h3>
+              <p>Una aplicación para gestionar los empleados de una empresa.</p>
+            </div>
+          </div>
+          <div className="project-card">
+            <div className="card-img project6"></div>
+            <div className="card-content">
+              <h3>Programa empleados</h3>
+              <p>Una aplicación para gestionar los empleados de una empresa.</p>
+            </div>
+          </div>
           {/* Puedes agregar más tarjetas de proyecto según lo requieras */}
         </div>
       </section>

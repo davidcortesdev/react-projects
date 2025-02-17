@@ -1,34 +1,45 @@
+import PropTypes from 'prop-types';
+import { useState, useEffect } from 'react';
+import { NavBar } from '../components/NavBar';
+import { SideBar } from '../components/SideBar';
+import '../../styles.css';
 
-import PropTypes from 'prop-types'
-import { NavBar, SideBar } from "../components"
-import { Box, Toolbar } from "@mui/material"
-
-const drawerWidth = 280
+const drawerWidth = 280;
 
 export const JournalLayout = ({ children }) => {
-  return (
+  const [isSidebarVisible, setIsSidebarVisible] = useState(true);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const isDesktop = window.innerWidth >= 768;
+      setIsSidebarVisible(isDesktop);
+    };
     
-    <Box sx={{ display: 'flex'}} className='animate__animated animate__fadeIn animate__faster'>
+    handleResize(); // Initial check
+    window.addEventListener('resize', handleResize);
+    
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
-        <NavBar drawerWidth={ drawerWidth }/>
+  const handleToggleSidebar = (isOpen) => {
+    setIsSidebarVisible(isOpen);
+  };
 
-        <SideBar drawerWidth={ drawerWidth }/>
-
-        <Box
-            component='main'
-            sx={{ flexGrow: 1, p: 3 }}
-        >
-
-                <Toolbar />
-
-                { children }
-
-        </Box>
-
-    </Box>
-  )
-}
+  return (
+    <div className="journal-layout fade-in">
+      <SideBar drawerWidth={drawerWidth} isVisible={isSidebarVisible} />
+      <NavBar 
+        drawerWidth={drawerWidth} 
+        isSidebarOpen={isSidebarVisible}
+        onToggleSidebar={handleToggleSidebar} 
+      />
+      <main className="journal-content">
+        {children}
+      </main>
+    </div>
+  );
+};
 
 JournalLayout.propTypes = {
-    children: PropTypes.array
-}
+  children: PropTypes.node,
+};

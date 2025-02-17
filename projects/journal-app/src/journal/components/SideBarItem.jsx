@@ -1,45 +1,35 @@
-import { TurnedInNot } from "@mui/icons-material"
-import { Grid, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material"
-import PropTypes from 'prop-types'
-import { useMemo } from "react"
-import { useDispatch } from "react-redux"
-import { setActiveNote } from "../../store/journal"
+import PropTypes from 'prop-types';
+import { useMemo } from 'react';
+import { useDispatch } from 'react-redux';
+import { setActiveNote } from '../../store/journal';
+import '../../styles.css';
 
-export const SideBarItem = ( { title = '', body, id, date, imageUrls = [] } ) => {
+export const SideBarItem = ({ title = '', body, id, date, imageUrls = [] }) => {
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch()
-    
-    const onClickNote = () => {
-        dispatch( setActiveNote( { title, body, id, date, imageUrls } ) )
-    }
+  const onClickNote = () => {
+    dispatch(setActiveNote({ title, body, id, date, imageUrls }));
+  };
 
-    const newTitlte = useMemo( () => {
-        return title.length > 17
-            ? title.substring(0,17) + '...'
-            : title
-    },[ title ])
+  const newTitle = useMemo(() => {
+    return title.length > 17 ? title.substring(0, 17) + '...' : title;
+  }, [title]);
 
-    
   return (
-    <ListItem disablePadding>
-        <ListItemButton onClick={ onClickNote }>
-            <ListItemIcon>
-                <TurnedInNot />
-            </ListItemIcon>
-            <Grid container>
-                <ListItemText primary={ newTitlte } />
-                <ListItemText secondary={ body } />
-            </Grid>
-        </ListItemButton>
-    </ListItem>
-  )
-}
-
+    <li className="sidebar-item" onClick={onClickNote}>
+      <div className="sidebar-item-icon">&#9733;</div>
+      <div className="sidebar-item-content">
+        <span className="sidebar-item-title">{newTitle}</span>
+        <span className="sidebar-item-body">{body}</span>
+      </div>
+    </li>
+  );
+};
 
 SideBarItem.propTypes = {
-    title: PropTypes.string,
-    body: PropTypes.string,
-    id: PropTypes.string,
-    date: PropTypes.number,
-    imageUrls: PropTypes.array,
-}
+  title: PropTypes.string,
+  body: PropTypes.string,
+  id: PropTypes.string,
+  date: PropTypes.number,
+  imageUrls: PropTypes.array,
+};

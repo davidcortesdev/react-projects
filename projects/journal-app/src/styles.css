@@ -1,3 +1,358 @@
-.box-shadow {
-    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
+/* Variables y configuración global */
+:root {
+  --primary-color: #1D3557;
+  --secondary-color: #FFD700;
+  --accent-color: #2B2D42;
+  --sidebar-bg: #2B2D42;
+  --sidebar-text: #ecf0f1;
+  --nav-bg: linear-gradient(135deg, #2B2D42, #2B2D42);
+  --main-bg: #f4f7fc;
+  --card-bg: #fafafa;
+  --drawer-width: 280px;
+  --font-family: 'Montserrat', sans-serif;
+}
+
+/* Reset y estilos globales */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family);
+  background: var(--main-bg);
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Utilidades */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Scrollbar custom */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--main-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #bbb;
+}
+
+/* NavBar */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: var(--drawer-width);
+  right: 0;
+  height: 60px;
+  background: var(--nav-bg);
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  transition: left 0.3s ease, width 0.3s ease;
+}
+
+.navbar .navbar-menu-icon {
+  display: none;
+}
+
+.navbar .navbar-title {
+  flex: 1;
+  text-align: center;
+}
+
+.navbar .navbar-title h1 {
+  font-size: 1.8rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+.navbar .navbar-actions .logout-button {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+.navbar .navbar-actions .logout-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: var(--drawer-width);
+  background: var(--sidebar-bg);
+  color: var(--sidebar-text);
+  padding: 16px;
+  overflow-y: auto;
+  transition: left 0.3s ease;
+}
+
+.sidebar .sidebar-header h2 {
+  font-size: 1.4rem;
+  margin-bottom: 16px;
+}
+
+.sidebar .sidebar-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Sidebar Item */
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.959);
+  transition: background 0.3s;
+}
+
+.sidebar-item:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.sidebar-item .sidebar-item-icon {
+  margin-right: 8px;
+  font-size: 1.2rem;
+  color: var(--secondary-color);
+}
+
+.sidebar-item .sidebar-item-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-item .sidebar-item-title {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.sidebar-item .sidebar-item-body {
+  font-size: 0.8rem;
+  color: #bbb;
+}
+
+/* Journal Layout */
+.journal-layout {
+  display: flex;
+  min-height: 100vh;
+  background: var(--main-bg);
+  padding-top: 60px; /* espacio para el NavBar */
+}
+
+.journal-content {
+  margin-left: var(--drawer-width);
+  flex: 1;
+  padding: 24px;
+}
+
+/* Image Gallery */
+.image-gallery {
+  column-count: 3;
+  column-gap: 16px;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.image-gallery-item {
+  break-inside: avoid;
+  margin-bottom: 16px;
+}
+
+.image-gallery-item img {
+  width: 100%;
+  border-radius: 8px;
+  display: block;
+}
+
+/* Journal Page */
+.new-note-button {
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+  background-color: var(--accent-color);
+  color: #fff;
+  border: none;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  font-size: 2rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: background 0.3s;
+}
+
+.new-note-button:hover {
+  background-color: #FFD700;
+}
+
+/* Note View */
+.note-view {
+  background: var(--card-bg);
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  margin-bottom: 24px;
+}
+
+.note-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.note-header .note-date {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.note-actions button {
+  margin-left: 8px;
+  padding: 8px 12px;
+  background: var(--primary-color);
+  color: #fff;
+  border-radius: 4px;
+  transition: background 0.3s;
+  border: none;
+}
+
+.note-actions button:hover {
+  background: #0d5ba8;
+}
+
+.file-input {
+  display: none;
+}
+
+.note-content {
+  margin-bottom: 16px;
+}
+
+.note-title {
+  width: 100%;
+  font-size: 1.8rem;
+  border: none;
+  border-bottom: 2px solid #ddd;
+  padding: 8px;
+  margin-bottom: 16px;
+}
+
+.note-body {
+  width: 100%;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  padding: 12px;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.note-footer {
+  text-align: right;
+}
+
+.delete-button {
+  background: var(--accent-color);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background 0.3s;
+  border: none;
+}
+
+.delete-button:hover {
+  background: #d32f2f;
+}
+
+/* Nothing Selected View */
+.nothing-selected {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 60px);
+  background: var(--primary-color);
+  color: #fff;
+  border-radius: 8px;
+  padding: 24px;
+  margin: 24px;
+}
+
+.nothing-selected .nothing-icon {
+  font-size: 100px;
+  margin-bottom: 16px;
+}
+
+/* RESPONSIVE */
+
+/* Ajustes para dispositivos con ancho máximo de 768px */
+@media (max-width: 768px) {
+  .sidebar {
+    left: -280px;
+    top: 60px;
+    z-index: 999;
+  }
+
+  .sidebar.sidebar-open {
+    left: 0;
+  }
+
+  .navbar {
+    left: 0 !important;
+    width: 100% !important;
+  }
+
+  .navbar h1 {
+    display: none;
+  }
+
+  .journal-content {
+    margin-left: 0 !important;
+    padding: 16px;
+  }
+
+  .navbar .navbar-menu-icon {
+    display: block;
+  }
+}
+
+/* Para pantallas muy pequeñas (menos de 480px) */
+@media (max-width: 480px) {
+  .image-gallery {
+    column-count: 1;
+  }
+  .navbar .navbar-title h1 {
+    font-size: 1.5rem;
+  }
+
 }

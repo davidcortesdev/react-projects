@@ -1,52 +1,34 @@
-import { Box, Divider, Drawer, List, Toolbar, Typography } from "@mui/material"
-import { useSelector } from "react-redux"
-import { SideBarItem } from "./"
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import { SideBarItem } from './SideBarItem';
+import '../../styles.css';
 
-export const SideBar = ({ drawerWidth }) => {
-
-    const { displayName } = useSelector( state => state.auth)
-    const { notes } = useSelector( state => state.journal)
+export const SideBar = ({ drawerWidth, isVisible }) => {
+  const { displayName } = useSelector(state => state.auth);
+  const { notes } = useSelector(state => state.journal);
 
   return (
-    
-    <Box
-        component='nav'
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+    <aside 
+      className="sidebar" 
+      style={{ 
+        width: drawerWidth,
+        left: isVisible ? 0 : -drawerWidth
+      }}
     >
-
-        <Drawer
-            variant="permanent"
-            open
-            sx={{ 
-                display: { xs: 'block' },
-                '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth }
-             }}
-        >
-
-            <Toolbar>
-                <Typography variant="h6" noWrap component='div'>
-                    { displayName }
-                </Typography>
-            </Toolbar>
-
-            <Divider />
-
-            <List>
-                {
-                    notes.map( nota => (
-                        <SideBarItem key={ nota.id } {...nota} />
-                    ))
-                }
-            </List>
-
-        </Drawer>
-
-    </Box>
-  )
-}
-
+      <div className="sidebar-header">
+        <h2>{displayName}</h2>
+      </div>
+      <hr />
+      <ul className="sidebar-list">
+        {notes.map(nota => (
+          <SideBarItem key={nota.id} {...nota} />
+        ))}
+      </ul>
+    </aside>
+  );
+};
 
 SideBar.propTypes = {
-    drawerWidth: PropTypes.number
-}
+  drawerWidth: PropTypes.number,
+  isVisible: PropTypes.bool
+};

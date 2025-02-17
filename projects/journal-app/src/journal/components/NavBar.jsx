@@ -1,52 +1,44 @@
-import { LogoutOutlined, MenuOutlined } from '@mui/icons-material'
-import { AppBar, Grid, IconButton, Toolbar, Typography } from '@mui/material'
-import PropTypes from 'prop-types'
-import { useDispatch } from 'react-redux'
-import { startLogout } from '../../store/auth/thunks'
+import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { startLogout } from '../../store/auth/thunks';
+import '../../styles.css';
 
+export const NavBar = ({ drawerWidth, isSidebarOpen, onToggleSidebar }) => {
+  const dispatch = useDispatch()
 
-export const NavBar = ({ drawerWidth }) => {
+  const handleMenuClick = () => {
+    onToggleSidebar(!isSidebarOpen);
+  };
 
-    const dispatch = useDispatch()
-
-    const onLogout = () => {
-        dispatch( startLogout() )
-    }
+  const onLogout = () => {
+    dispatch(startLogout())
+  }
 
   return (
-    
-    <AppBar
-        position='fixed'
-        sx={{ 
-            width: { sm: `calc(100% - ${ drawerWidth }px)` },
-            ml: { sm: `${ drawerWidth }px` }
-         }}
+    <header 
+      className="navbar" 
+      style={{
+        left: isSidebarOpen ? `${drawerWidth}px` : '0',
+        width: isSidebarOpen ? `calc(100% - ${drawerWidth}px)` : '100%'
+      }}
     >
-
-        <Toolbar>
-            <IconButton 
-                color='inherit'
-                edge='start'
-                sx={{ mr: 2, display: { sm: 'none' }}}>
-
-                <MenuOutlined />
-
-            </IconButton>
-
-            <Grid container direction='row' justifyContent='space-between' alignItems='center'>
-                <Typography variant='h6' noWrap component='div'> Mi diario </Typography>
-            </Grid>
-
-            <IconButton color='error' onClick={ onLogout }>
-                <LogoutOutlined/>
-            </IconButton>
-
-        </Toolbar>
-
-    </AppBar>
-  )
-}
+      <div className="navbar-menu-icon" onClick={handleMenuClick}>
+        <span className="menu-icon">&#9776;</span>
+      </div>
+      <div className="navbar-title">
+        <h1>Mi Diario</h1>
+      </div>
+      <div className="navbar-actions">
+        <button className="logout-button" onClick={onLogout}>
+          Salir
+        </button>
+      </div>
+    </header>
+  );
+};
 
 NavBar.propTypes = {
-    drawerWidth: PropTypes.number
-}
+  drawerWidth: PropTypes.number,
+  isSidebarOpen: PropTypes.bool,
+  onToggleSidebar: PropTypes.func
+};
