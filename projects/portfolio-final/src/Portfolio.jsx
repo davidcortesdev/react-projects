@@ -46,7 +46,7 @@ export const Portfolio = () => {
           <div className="project-card">
             <div className="card-img project3"></div>
             <div className="card-content">
-              <h3>Proyecto Tres</h3>
+              <h3>Buscador de películas</h3>
               <p>Un buscador de películas, obtenidas de una API.</p>
             </div>
           </div>
