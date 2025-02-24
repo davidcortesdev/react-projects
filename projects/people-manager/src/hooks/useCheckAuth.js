@@ -11,19 +11,27 @@ export const useCheckAuth = () => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(FirebaseAuth, async (user) => {
+      console.log('onAuthStateChanged:', user);
       if (user) {
-        // 1. Obtener datos FRESH de Firestore
-        const userDoc = await getDoc(doc(FirebaseDB, "users", user.uid));
-        
-        // 2. Actualizar Redux con datos actualizados
-        if (userDoc.exists()) {
-          dispatch(login(userDoc.data())); // Sobrescribe el persist
+        try {
+          const userDocRef = doc(FirebaseDB, "users", user.uid);
+          const userDoc = await getDoc(userDocRef);
+          console.log('userDoc:', userDoc.exists(), userDoc.data());
+          if (userDoc.exists()) {
+            dispatch(login({ uid: user.uid, ...userDoc.data() }));
+          } else {
+            console.error('El documento del usuario no existe');
+            dispatch(logout({ errorMessage: "El usuario no existe en la base de datos." }));
+          }
+        } catch (error) {
+          console.error("Error al obtener el documento de usuario:", error);
+          dispatch(logout({ errorMessage: error.message }));
         }
       } else {
         dispatch(logout());
       }
     });
-    return unsubscribe;
+    return () => unsubscribe();
   }, [dispatch]);
 
   return { status };

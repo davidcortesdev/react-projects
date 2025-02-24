@@ -4,9 +4,11 @@ import { useState } from 'react';
 import { Navegador } from './nav/Navegador';
 import { startActualizarUsuario, startUpdateHeroe } from '../../store/auth/thunks';
 import './menu.css';
+import { useNavigate } from 'react-router-dom';
 
   export const Menu = () => {
 
+    const navigate = useNavigate();
     const heroImages = {
       'Hulk': 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Hulk_%282540708438%29.jpg',
       'Iron Man': 'https://img2.beritasatu.com/cache/investor/480x310-3/20130425131309640.jpg',
@@ -43,6 +45,10 @@ import './menu.css';
       dispatch(startUpdateHeroe(uid, localHeroe, localMotivoHeroe))
     }
 
+    const handleNavigate = (path) => {
+      navigate(path);
+    };
+
     return (
       <div className="dashboard">
         
@@ -69,11 +75,10 @@ import './menu.css';
                   </div>
                 </div>
                 <div className="header-actions">
-                  <button className="action-btn primary">
-                    <span className="icon">📨</span> Mensajes
-                  </button>
-                  <button className="action-btn secondary">
-                    <span className="icon">👥</span> Gestionar Equipo
+                  <button 
+                  className="action-btn primary"
+                  onClick={() => handleNavigate('/chatpage')}>
+                  <span className="icon">📨</span> Mensajes
                   </button>
                 </div>
               </div>
@@ -202,8 +207,12 @@ import './menu.css';
                       </div>
                     </div>
                     <div className="hero-actions">
-                      <button className="hero-btn outline">📋 Misiones</button>
-                      <button className="hero-btn outline">📤 Exportar PDF</button>
+                      <button 
+                        className="hero-btn outline"
+                        onClick={() => handleNavigate('/misiones')}>
+                        📋 Misiones
+                      </button>
+                      
                       <button 
                         className="hero-btn primary" 
                         disabled={isEditing}
