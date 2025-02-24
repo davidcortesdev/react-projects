@@ -29,49 +29,60 @@ export const Portfolio = () => {
       <section id="proyectos" className="projects">
         <h2>Proyectos Destacados</h2>
         <div className="projects-grid">
-          <div className="project-card">
-            <div className="card-img project1"></div>
-            <div className="card-content">
-              <h3>Programa empleados</h3>
-              <p>Una aplicación para gestionar los empleados de una empresa.</p>
+          <a href="https://empleados-app-dcl.netlify.app">
+            <div className="project-card">
+              <div className="card-img project1"></div>
+              <div className="card-content">
+                <h3>Programa empleados</h3>
+                <p>Una aplicación para gestionar los empleados de una empresa.</p>
+              </div>
             </div>
-          </div>
-          <div className="project-card">
-            <div className="card-img project2"></div>
-            <div className="card-content">
-              <h3>Tic Tac Toe</h3>
-              <p>Un juego clásico y divertido.</p>
+          </a>
+          <a href="https://tic-tac-toe-dcl.netlify.app">
+            <div className="project-card">
+              <div className="card-img project2"></div>
+              <div className="card-content">
+                <h3>Tic Tac Toe</h3>
+                <p>Un juego clásico y divertido.</p>
+              </div>
             </div>
-          </div>
-          <div className="project-card">
-            <div className="card-img project3"></div>
-            <div className="card-content">
-              <h3>Buscador de películas</h3>
-              <p>Un buscador de películas, obtenidas de una API.</p>
+          </a>
+          <a href="https://movie-finder-dcl.netlify.app">
+            <div className="project-card">
+              <div className="card-img project3"></div>
+              <div className="card-content">
+                <h3>Buscador de películas</h3>
+                <p>Un buscador de películas, obtenidas de una API.</p>
+              </div>
             </div>
-          </div>
-          <div className="project-card">
-            <div className="card-img project4"></div>
-            <div className="card-content">
-              <h3>Programa empleados</h3>
-              <p>Una aplicación para gestionar los empleados de una empresa.</p>
+          </a>
+          <a href="https://app.netlify.com/sites/notas-dcl/overview">
+            <div className="project-card">
+              <div className="card-img project4"></div>
+              <div className="card-content">
+                <h3>Mis notas</h3>
+                <p>Una aplicación para crear notas con texto e imagenes.</p>
+              </div>
             </div>
-          </div>
-          <div className="project-card">
-            <div className="card-img project5"></div>
-            <div className="card-content">
-              <h3>Programa empleados</h3>
-              <p>Una aplicación para gestionar los empleados de una empresa.</p>
+          </a>
+          <a href="https://heroes-app-dcl.netlify.app">
+            <div className="project-card">
+              <div className="card-img project5"></div>
+              <div className="card-content">
+                <h3>Info Héroes</h3>
+                <p>Encuentra datos sobre tus héroes favoritos.</p>
+              </div>
             </div>
-          </div>
-          <div className="project-card">
-            <div className="card-img project6"></div>
-            <div className="card-content">
-              <h3>Programa empleados</h3>
-              <p>Una aplicación para gestionar los empleados de una empresa.</p>
+          </a>
+          <a href="https://ejemplo.com">
+            <div className="project-card">
+              <div className="card-img project6"></div>
+              <div className="card-content">
+                <h3>Programa empleados</h3>
+                <p>Una aplicación para gestionar los empleados de una empresa.</p>
+              </div>
             </div>
-          </div>
-          {/* Puedes agregar más tarjetas de proyecto según lo requieras */}
+          </a>
         </div>
       </section>
 

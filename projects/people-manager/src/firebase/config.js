@@ -1,8 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
-
+import { browserLocalPersistence, getAuth, setPersistence } from "firebase/auth";
+import { enableIndexedDbPersistence, getFirestore } from "firebase/firestore";
 
 
 const firebaseConfig = {
@@ -19,3 +18,11 @@ const firebaseConfig = {
 export const FirebaseApp = initializeApp(firebaseConfig);
 export const FirebaseAuth = getAuth( FirebaseApp )
 export const FirebaseDB = getFirestore( FirebaseApp )
+
+const auth = getAuth(FirebaseApp);
+setPersistence(auth, browserLocalPersistence);
+
+enableIndexedDbPersistence(FirebaseDB)
+  .catch((err) => {
+    console.error("Firestore persistence failed: ", err);
+  });

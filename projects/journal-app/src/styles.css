@@ -1,13 +1,13 @@
 /* Variables y configuración global */
 :root {
-  --primary-color: #1D3557;
+  --primary-color: #2B2D42;
   --secondary-color: #FFD700;
-  --accent-color: #2B2D42;
+  --accent-color: #FFD700;
   --sidebar-bg: #2B2D42;
   --sidebar-text: #ecf0f1;
   --nav-bg: linear-gradient(135deg, #2B2D42, #2B2D42);
-  --main-bg: #f4f7fc;
-  --card-bg: #fafafa;
+  --main-bg: #031a41a1;
+  --card-bg: #fafafa20;
   --drawer-width: 280px;
   --font-family: 'Montserrat', sans-serif;
 }
@@ -165,15 +165,15 @@ body {
 /* Journal Layout */
 .journal-layout {
   display: flex;
-  min-height: 100vh;
   background: var(--main-bg);
-  padding-top: 60px; /* espacio para el NavBar */
+  padding-top: 60px;
 }
 
 .journal-content {
   margin-left: var(--drawer-width);
   flex: 1;
   padding: 24px;
+  min-height: calc(100vh - 60px);
 }
 
 /* Image Gallery */
@@ -213,7 +213,7 @@ body {
 }
 
 .new-note-button:hover {
-  background-color: #FFD700;
+  background-color: #ffd90076;
 }
 
 /* Note View */
@@ -234,7 +234,7 @@ body {
 
 .note-header .note-date {
   font-size: 0.9rem;
-  color: #888;
+  color: #ffffff;
 }
 
 .note-actions button {
@@ -300,11 +300,11 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: calc(100vh - 60px);
+  min-height: calc(90vh - 60px);
   background: var(--primary-color);
   color: #fff;
   border-radius: 8px;
-  padding: 24px;
+  padding: 20px;
   margin: 24px;
 }
 

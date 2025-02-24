@@ -4,7 +4,7 @@ import { startCreatingUser } from "../../store/auth/thunks";
 import { AuthLayout } from "../layout/AuthLayout";
 import { useMemo, useState } from "react";
 import { useForm } from "../../hooks/useForm";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const formData = {
   email: '',
@@ -163,7 +163,7 @@ export const RegisterPage = () => {
       </form>
 
       <p>
-        ¿Ya tienes cuenta? <a href="/auth/login">Inicia sesión aquí</a>
+        ¿Ya tienes cuenta? <Link to="/auth/login">Inicia sesión aquí</Link>
       </p>
     </AuthLayout>
   );

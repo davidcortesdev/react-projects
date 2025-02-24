@@ -1,16 +1,17 @@
 /* eslint-disable react/prop-types */
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { startLogout } from "../../../store/auth/thunks";
 import { useState } from 'react';
 
 export const Navegador = ({ nombre, apellido1 }) => {
   
+  const navigate = useNavigate()
   const dispatch = useDispatch();
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // Estado para menú móvil
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const onLogout = () => {
-    dispatch(startLogout());
+    dispatch(startLogout({navigate}));
   };
 
   const toggleMenu = () => {

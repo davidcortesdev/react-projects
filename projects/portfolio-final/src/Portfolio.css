@@ -81,7 +81,10 @@
   /* Sección Hero */
   .hero {
     height: 50vh;
-    background: linear-gradient(135deg, #0f70d7, #dc58f3);
+    background-image: url('../public/fondo-portfolio2.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -139,6 +142,7 @@
     padding: 0 1rem;
     margin: 0 auto;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    align-items: stretch;
   }
   
   .project-card {
@@ -147,6 +151,9 @@
     overflow: hidden;
     box-shadow: 0 8px 16px rgba(0,0,0,0.1);
     transition: transform 0.3s ease;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
   }
   
   .project-card:hover {
@@ -158,6 +165,18 @@
     background-size: cover;
     background-position: center;
   }
+
+
+  a {
+    text-decoration: none;
+  }
+
+
+  .nav-menu a {
+    text-decoration: none;
+  }
+
+
   
   /* Imágenes de ejemplo para proyectos */
   .project1 {
@@ -171,9 +190,21 @@
   .project3 {
     background-image: url('../public/movies.png');
   }
-  
+
+  .project4 {
+    background-image: url('../public/diario.png');
+  }
+
+  .project5 {
+    background-image: url('../public/heroes-app.png');
+  }
+
   .card-content {
     padding: 1rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
   
   .card-content h3 {
@@ -185,6 +216,7 @@
   .card-content p {
     font-size: 1rem;
     color: #7f8c8d;
+    overflow: hidden;
   }
   
   /* Sección Sobre Mí */
