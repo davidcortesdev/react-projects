@@ -17,11 +17,20 @@ export const useCheckAuth = () => {
           const userDocRef = doc(FirebaseDB, "users", user.uid);
           const userDoc = await getDoc(userDocRef);
           console.log('userDoc:', userDoc.exists(), userDoc.data());
+          
           if (userDoc.exists()) {
             dispatch(login({ uid: user.uid, ...userDoc.data() }));
           } else {
-            console.error('El documento del usuario no existe');
-            dispatch(logout({ errorMessage: "El usuario no existe en la base de datos." }));
+            setTimeout(async () => {
+              const refreshedDoc = await getDoc(userDocRef);
+              
+              if (refreshedDoc.exists()) {
+                dispatch(login({ uid: user.uid, ...refreshedDoc.data() }));
+              } else {
+                console.error('El documento del usuario no existe');
+                dispatch(logout({ errorMessage: "El usuario no existe en la base de datos." }));
+              }
+            }, 500);
           }
         } catch (error) {
           console.error("Error al obtener el documento de usuario:", error);

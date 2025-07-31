@@ -6,7 +6,7 @@ import { persistor } from '../store'
 
 
 export const startCreatingUser = ({ email, password, nombre, apellido1, apellido2, 
-    fechaNacimiento, fechaAntiguedad, departamento, puesto, navigate }) => {
+    fechaNacimiento, fechaAntiguedad, departamento, puesto }) => {
     return async (dispatch) => {
 
         dispatch( checkingCredentials() )
@@ -23,7 +23,6 @@ export const startCreatingUser = ({ email, password, nombre, apellido1, apellido
         dispatch( login({ uid, email, nombre, apellido1, apellido2, fechaNacimiento, 
                           fechaAntiguedad, departamento, puesto }))
 
-        navigate('/selecthero');
     }
 }
 

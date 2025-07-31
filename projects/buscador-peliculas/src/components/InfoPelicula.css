@@ -1,0 +1,75 @@
+.movie-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.701), rgba(0, 0, 0, 0.701)), url("../../public/fondo.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: var(--text-color);
+}
+
+.movie-detail h2 {
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+  text-align: center;
+}
+
+.movie-detail-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  background-color: #1c1c1c;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+  max-width: 1000px;
+  width: 100%;
+}
+
+.movie-poster {
+  max-width: 300px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.movie-info {
+  flex: 1;
+  min-width: 250px;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.movie-info p {
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #444;
+  padding-bottom: 0.5rem;
+}
+
+.loading,
+.error {
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 2rem;
+}
+
+/* Botón para volver */
+.back-button {
+  margin-top: 2rem;
+  padding: 0.8rem 1.5rem;
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.back-button:hover {
+  background-color: var(--accent-color);
+}

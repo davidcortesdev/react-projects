@@ -16,9 +16,9 @@ export const SelectHero = () => {
 
 
   const heroImages = {
-    'Hulk': 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Hulk_%282540708438%29.jpg',
-    'Iron Man': 'https://img2.beritasatu.com/cache/investor/480x310-3/20130425131309640.jpg',
-    'Capitán América': 'https://muychulo.es/wp-content/uploads/2020/12/capitan-america-1969111.jpg',
+    'Hulk': '/hulk.jpg',
+    'Iron Man': '/ironman.jpg',
+    'Capitán América': '/captain-america.png',
   };
 
 
@@ -28,13 +28,12 @@ export const SelectHero = () => {
 
 
   const handleConfirm = () => {
-  
     if (!motivo.trim()) {
       alert('Por favor, escribe por qué seleccionas a este héroe.');
       return;
     }
-
-    dispatch(startUpdateHeroe(uid, selectedHero, motivo))
+  
+    dispatch(startUpdateHeroe(uid, selectedHero, motivo));
     navigate('/menu');
   };
 

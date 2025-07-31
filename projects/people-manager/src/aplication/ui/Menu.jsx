@@ -1,18 +1,18 @@
 /* eslint-disable react/prop-types */
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Navegador } from './nav/Navegador';
 import { startActualizarUsuario, startUpdateHeroe } from '../../store/auth/thunks';
-import './menu.css';
 import { useNavigate } from 'react-router-dom';
+import './menu.css';
 
   export const Menu = () => {
 
     const navigate = useNavigate();
     const heroImages = {
-      'Hulk': 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Hulk_%282540708438%29.jpg',
-      'Iron Man': 'https://img2.beritasatu.com/cache/investor/480x310-3/20130425131309640.jpg',
-      'Capitán América': 'https://muychulo.es/wp-content/uploads/2020/12/capitan-america-1969111.jpg',
+      'Hulk': '/hulk.jpg',
+      'Iron Man': '/ironman.jpg',
+      'Capitán América': '/captain-america.png',
     };
     
     const dispatch = useDispatch();
@@ -29,6 +29,12 @@ import { useNavigate } from 'react-router-dom';
     const [localHeroe, setLocalHeroe] = useState(heroe);
     const [localMotivoHeroe, setLocalMotivoHeroe] = useState(motivoHeroe);
     
+    useEffect(() => {
+      setLocalHeroe(heroe);
+      setLocalMotivoHeroe(motivoHeroe);
+    }, [heroe, motivoHeroe]);
+
+
 
     const [isEditing, setIsEditing] = useState(false);
 
@@ -197,7 +203,7 @@ import { useNavigate } from 'react-router-dom';
                       />
                       <div className="hero-details">
                         <p className="hero-description">
-                          Líder estratégico con capacidad para motivar equipos y alcanzar objetivos clave.
+                          Motivo de elección de héroe:
                         </p>
                         <textarea 
                           className="hero-input"
@@ -250,7 +256,7 @@ import { useNavigate } from 'react-router-dom';
   const SelectInput = ({ label, value, options, onChange }) => (
     <div className="form-group">
       <label className="form-label">{label}</label>
-      <select className="form-select" value={value} onChange={onChange}>
+      <select className="form-select" value={value || ''} onChange={onChange}>
         {options.map(option => (
           <option 
           key={option} 

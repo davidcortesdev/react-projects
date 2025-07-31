@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -5,7 +6,6 @@ import { Navegador } from '../ui/nav/Navegador';
 import { getMensajes, enviarMensaje, getEmpleados } from '../../store/app/thunks';
 import { formatDate } from '../helpers/FormDate';
 import '../ui/Menu.css';
-
 
 export const ChatPage = () => {
   const dispatch = useDispatch();
@@ -15,24 +15,21 @@ export const ChatPage = () => {
   const [selectedEmployee, setSelectedEmployee] = useState('');
   const [newMessage, setNewMessage] = useState('');
 
-
   useEffect(() => {
     if (uid) {
-      dispatch(getMensajes(uid));
+      dispatch(getMensajes(uid)); // Carga los mensajes al inicializar el componente
+      dispatch(getEmpleados());
     }
-    dispatch(getEmpleados());
-  }, [dispatch, uid]);
-
+  }, [uid]);
 
   useEffect(() => {
-    if (empleados && empleados.length > 0 && !selectedEmployee) {
+    if (!selectedEmployee && empleados.length > 0) {
       setSelectedEmployee(empleados[0].id);
     }
   }, [empleados, selectedEmployee]);
 
-
   const handleRefresh = () => {
-    dispatch(getMensajes(uid));
+    dispatch(getMensajes(uid));  // Actualiza los mensajes al hacer click en refrescar
   };
 
   const fechaFormateada = formatDate(Date.now());
@@ -48,9 +45,13 @@ export const ChatPage = () => {
       fechaMensaje: fechaFormateada,
     };
 
-    dispatch(enviarMensaje(mensaje));
-    setNewMessage('');
-    dispatch(getMensajes(uid));
+    dispatch(enviarMensaje(mensaje)); // Enviar mensaje
+
+    // Actualiza los mensajes de manera local, para evitar que se dupliquen
+    const nuevoMensaje = { ...mensaje, id: Date.now() };  // Usar un ID único para el mensaje local
+    dispatch({ type: 'app/addMensaje', payload: nuevoMensaje }); // Agrega el mensaje al estado local
+
+    setNewMessage('');  // Limpia el campo de mensaje
   };
 
   return (
@@ -72,10 +73,12 @@ export const ChatPage = () => {
               {/* Pantalla de mensajes */}
               <div className="chat-screen" style={{ maxHeight: '300px', overflowY: 'auto', padding: '1rem', background: 'var(--surface)', borderRadius: 'var(--radius-sm)', marginBottom: '1rem' }}>
                 {mensajes && mensajes.length > 0 ? (
-                  mensajes.map((msg) => {
-                    fechaFormateada
+                  mensajes.map((msg, index) => {
                     return (
-                      <div key={msg.id} style={{ marginBottom: '0.75rem', borderBottom: '1px solid var(--border)', paddingBottom: '0.5rem' }}>
+                      <div
+                        key={`${msg.id}-${index}`}  // Usamos una combinación de id y el índice para garantizar unicidad
+                        style={{ marginBottom: '0.75rem', borderBottom: '1px solid var(--border)', paddingBottom: '0.5rem' }}
+                      >
                         <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
                           De: {msg.emisorEmail} - {fechaFormateada}
                         </div>

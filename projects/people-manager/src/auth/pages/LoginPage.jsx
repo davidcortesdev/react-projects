@@ -6,8 +6,8 @@ import { startLogin } from "../../store/auth/thunks";
 import { useNavigate, Link } from "react-router-dom";
 
 const formData = {
-  email: '',
-  password: '',
+  email: 'admin@gmail.com',
+  password: 'admin123',
 };
 
 export const LoginPage = () => {

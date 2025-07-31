@@ -1,0 +1,21 @@
+.header{
+   display: flex;
+   justify-content: space-between;
+   height: 7rem;
+   align-items: center;
+   padding: 1rem;
+}
+
+
+.header-price{
+   margin-right: 1rem;
+   font-size: 1.2rem;
+   font-weight: 500;
+}
+
+
+.header-category{
+   margin-right: 1rem;
+   font-size: 1.2rem;
+   font-weight: 500;
+}

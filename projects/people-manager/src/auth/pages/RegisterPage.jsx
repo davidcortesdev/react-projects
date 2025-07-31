@@ -6,6 +6,7 @@ import { useMemo, useState } from "react";
 import { useForm } from "../../hooks/useForm";
 import { Link, useNavigate } from "react-router-dom";
 
+
 const formData = {
   email: '',
   nombre: '',
@@ -19,14 +20,18 @@ const formData = {
 }
 
 const formValidations = {
-  email: [ (value) => value.includes('@') , 'El correo debe de tener una @.'],
+  email: [(value) => value.includes('@'), 'El correo debe contener una "@" y ser válido.'],
   nombre: [(value) => value.length >= 3, 'El nombre debe contener al menos 3 caracteres.'],
-  apellido1: [(value) => value.length >= 3, 'El nombre debe contener al menos 3 caracteres.'],
-  apellido2: [(value) => value.length >= 3, 'El nombre debe contener al menos 3 caracteres.'],
-  fechaNacimiento: [(value) => value.length >= 3, 'El nombre debe contener al menos 3 caracteres.'],
-  fechaAntiguedad: [(value) => value.length >= 3, 'El nombre debe contener al menos 3 caracteres.'],
-  password: [ (value) => value.length >= 6 , 'La contraseña debe tener mas de 6 caracteres.'],
-}
+  apellido1: [(value) => value.length >= 3, 'El primer apellido debe contener al menos 3 caracteres.'],
+  apellido2: [(value) => value.length >= 3, 'El segundo apellido debe contener al menos 3 caracteres.'],
+  fechaNacimiento: [
+    (value) => /^\d{4}-\d{2}-\d{2}$/.test(value), 'La fecha de nacimiento debe estar en formato YYYY-MM-DD.'
+  ],
+  fechaAntiguedad: [
+    (value) => /^\d{4}-\d{2}-\d{2}$/.test(value), 'La fecha de antigüedad debe estar en formato YYYY-MM-DD.'
+  ],
+  password: [(value) => value.length >= 6, 'La contraseña debe tener al menos 6 caracteres.'],
+};
 
 export const RegisterPage = () => {
 
@@ -53,6 +58,8 @@ export const RegisterPage = () => {
     if( !isFormValid ) return
 
     dispatch( startCreatingUser({ ...formState, navigate }) )
+
+    navigate('/selecthero');
     
   }
 
@@ -62,90 +69,123 @@ export const RegisterPage = () => {
     <AuthLayout>
       <h1>Crear Cuenta</h1>
         
-        <input 
-          type="email" 
-          placeholder="correo@google.com"
-          name="email"
-          value={ email }
-          onChange={ onInputChange }
-          aria-label={ !!emailValid && formSubmitted }
-          aria-describedby={ emailValid ? 'email-helper-text' : undefined } />
-      
-
       <form className="register-form" onSubmit={ onSubmit }>
-        <input 
-          type="text" 
-          placeholder="Nombre"
-          name="nombre"
-          value={ nombre }
-          onChange={ onInputChange }
-          aria-label={ !!nombreValid && formSubmitted }
-          aria-describedby={ nombreValid ? 'displayName-helper-text' : undefined } />
-
-
-        <input 
-          type="text" 
-          placeholder="Primer apellido"
-          name="apellido1"
-          value={ apellido1 }
-          onChange={ onInputChange }
-          aria-label={ !!apellido1Valid && formSubmitted }
-          aria-describedby={ apellido1Valid ? 'email-helper-text' : undefined } />
-
-
-        <input 
-          type="text" 
-          placeholder="Segundo apellido"
-          name="apellido2"
-          value={ apellido2 }
-          onChange={ onInputChange }
-          aria-label={ !!apellido2Valid && formSubmitted }
-          aria-describedby={ apellido2Valid ? 'email-helper-text' : undefined } />
-
-
-        <input 
-          type="date" 
-          placeholder="Fecha Nacimiento"
-          name="fechaNacimiento"
-          value={ fechaNacimiento }
-          onChange={ onInputChange }
-          aria-label={ !!fechaNacimientoValid && formSubmitted }
-          aria-describedby={ fechaNacimientoValid ? 'email-helper-text' : undefined } />
+      
+        <div className="form-group">
+          <input 
+            id="email"
+            type="email" 
+            placeholder="correo@google.com"
+            name="email"
+            value={ email }
+            onChange={ onInputChange }
+          />
+          {formSubmitted && emailValid && <span className="error-message">{emailValid}</span>}
+        </div>
         
+        <div className="form-group">
+          <input 
+            id="nombre"
+            type="text" 
+            placeholder="Nombre"
+            name="nombre"
+            value={ nombre }
+            onChange={ onInputChange }
+          />
+          {formSubmitted && nombreValid && <span className="error-message">{nombreValid}</span>}
+        </div>
 
-        <input 
-          type="date" 
-          placeholder="Fecha Antiguead"
-          name="fechaAntiguedad"
-          value={ fechaAntiguedad }
-          onChange={ onInputChange }
-          aria-label={ !!fechaAntiguedadValid && formSubmitted }
-          aria-describedby={ fechaAntiguedadValid ? 'email-helper-text' : undefined } />
+        <div className="form-group">
+          <input 
+            id="apellido1"
+            type="text" 
+            placeholder="Primer apellido"
+            name="apellido1"
+            value={ apellido1 }
+            onChange={ onInputChange }
+            aria-label={ !!apellido1Valid && formSubmitted }
+            aria-describedby={ apellido1Valid ? 'email-helper-text' : undefined } />
+        </div>
 
+        <div className="form-group">
+          <input 
+            id="apellido2"
+            type="text" 
+            placeholder="Segundo apellido"
+            name="apellido2"
+            value={ apellido2 }
+            onChange={ onInputChange }
+            aria-label={ !!apellido2Valid && formSubmitted }
+            aria-describedby={ apellido2Valid ? 'email-helper-text' : undefined } />
+        </div>
 
-        <SelectInput 
-          name='departamento'
-          value={departamento}
-          options={['TI', 'Ventas', 'Recursos Humanos']}
-          onChange={ onInputChange }
-        />
+        <div className="form-group">
+          <label htmlFor="fechaNacimiento"
+                  style={{ display: "flex", color: "gray", marginTop: "8px" }}>
+                  Fecha de Nacimiento:
+          </label>
+          <input 
+            id="fechaNacimiento"
+            type="date" 
+            placeholder="Fecha de nacimiento (YYYY-MM-DD)"
+            name="fechaNacimiento"
+            value={ fechaNacimiento }
+            onChange={ onInputChange }
+            title="Seleccione su fecha de nacimiento"
+            aria-label="Fecha de Nacimiento"
+            style={{ margin: "0px", marginBottom: "8px"}}
+          />
+          {formSubmitted && fechaNacimientoValid && <span className="error-message">{fechaNacimientoValid}</span>}
+        </div>
 
-        <SelectInput 
-          name='puesto'
-          value={puesto}
-          options={['Manager', 'Asesor', 'Desarrollador']}
-          onChange={ onInputChange }
-        />
+        <div className="form-group">
+          <label htmlFor="fechaNacimiento"
+                  style={{ display: "flex", color: "gray", margin: "0px", marginTop: "8px", }}>
+                  Fecha de Antigüedad:
+          </label>
+          <input 
+            id="fechaAntiguedad"
+            type="date" 
+            placeholder="Fecha de ingreso a la empresa (YYYY-MM-DD)"
+            name="fechaAntiguedad"
+            value={ fechaAntiguedad }
+            onChange={ onInputChange }
+            title="Seleccione su fecha de ingreso a la empresa"
+            aria-label="Fecha de Antigüedad"
+            style={{ margin: "0px", marginBottom: "8px"}}
+          />
+          {formSubmitted && fechaAntiguedadValid && <span className="error-message">{fechaAntiguedadValid}</span>}
+        </div>
 
+        <div className="form-group">
+          <SelectInput 
+            name='departamento'
+            value={departamento}
+            options={['TI', 'Ventas', 'Recursos Humanos']}
+            onChange={ onInputChange }
+          />
+        </div>
 
-        <input 
-          type="password" 
-          placeholder="Contraseña"
-          name="password"
-          value={ password }
-          onChange={ onInputChange }
-          aria-label={ !!passwordValid && formSubmitted }
-          aria-describedby={ passwordValid ? 'password-helper-text' : undefined } />
+        <div className="form-group">
+          <SelectInput 
+            name='puesto'
+            value={puesto}
+            options={['Manager', 'Asesor', 'Desarrollador']}
+            onChange={ onInputChange }
+          />
+        </div>
+
+        <div className="form-group">
+          <input 
+            id="password"
+            type="password" 
+            placeholder="Contraseña"
+            name="password"
+            value={ password }
+            onChange={ onInputChange }
+          />
+          {formSubmitted && passwordValid && <span className="error-message">{passwordValid}</span>}
+        </div>
         
 
         <div style={{ marginTop: '8px', display: errorMessage ? 'block' : 'none' }}>
